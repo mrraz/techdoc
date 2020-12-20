@@ -12,7 +12,7 @@ steps:
   args: ['clone', 'https://github.com/google/docsy-example.git']
 
 - id: 'download git submodule'
-  name: 'gcr.io/cloud-builders/git'
+  name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   args:
     - -c
