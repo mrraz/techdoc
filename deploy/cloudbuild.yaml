@@ -23,8 +23,13 @@ steps:
   args:
     - -c
     - |
-      hugo -s ./src
-      mv public/ deploy/
+      pwd
+      ls
+      ls /workspace/.git/
+      ls /workspace/techdoc
+      hugo -s /workspace/techdoc
+      mv /workspace/techdoc/content deploy/
+      ls deploy/
 
 - id: 'gcloud deploy app'
   name: gcr.io/cloud-builders/gcloud-slim
