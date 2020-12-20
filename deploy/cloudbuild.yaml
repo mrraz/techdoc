@@ -18,7 +18,7 @@ steps:
     - '-C'
     - |
       git submodule init
-      git submodeule update
+      git submodule update
 
 
 # the step needed only only when creating/updating Hugo image
