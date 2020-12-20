@@ -6,9 +6,19 @@ images:
   
 # https://cloud.google.com/cloud-build/docs/build-config
 steps:
-- id: 'download git code and submodule'
+- id: 'download git code'
   name: 'gcr.io/cloud-builders/git'
-  args: ['clone', '--recurse-submodules', '--depth 1', 'https://github.com/google/docsy-example.git']
+  args: ['clone', 'https://github.com/google/docsy-example.git']
+
+steps:
+- id: 'download git submodule'
+  name: 'gcr.io/cloud-builders/git'
+  entrypoint: 'sh'
+  args:
+    - -c
+    - |
+      cd docsy-example
+      git submodule update --init --recursiveupdate
 
 
 # the step needed only only when creating/updating Hugo image
