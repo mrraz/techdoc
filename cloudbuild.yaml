@@ -1,0 +1,37 @@
+substitutions:
+  _HUGO_VERSION: "0.52"
+
+images: 
+  - 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest'
+  
+# https://cloud.google.com/cloud-build/docs/build-config
+steps:
+# the step needed only only when creating/updating Hugo image
+- id: 'budil hugo img'
+  name: 'gcr.io/cloud-builders/docker'
+  args: [
+            'build',
+            '--build-arg', 'HUGO_VERSION=${_HUGO_VERSION}',
+            '-t', 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest',
+            '--cache-from', 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest',
+            '-f', 'deploy/hugo.Dockerfile', 'deploy/'
+        ]
+
+- id: 'hugo build site'
+  name: 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest'
+  entrypoint: 'sh'
+  args:
+    - -c
+    - |
+      hugo -s ./src
+      mv public/ deploy/
+
+- id: 'gcloud deploy app'
+  name: gcr.io/cloud-builders/gcloud-slim
+  dir: deploy/
+  args: ['--project=$PROJECT_ID', 'app', 'deploy', 'app.yaml']
+
+options:
+  machineType: 'N1_HIGHCPU_32'
+
+timeout: '120s'
