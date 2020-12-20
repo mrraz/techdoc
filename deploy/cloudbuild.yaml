@@ -15,8 +15,9 @@ steps:
   name: 'gcr.io/cloud-builders/git'
   entrypoint: 'bash'
   args:
-    - '-C'
-    - | 
+    - '-c'
+    - |
+      git config -f .git/config submodule.github_mrraz_techdoc.url https://source.cloud.google.com/silken-inverter-299218/github_mrraz_techdoc 
       git config -f .gitmodules submodule.github_mrraz_techdoc.url https://source.cloud.google.com/silken-inverter-299218/github_mrraz_techdoc
       git submodule init
       git submodule update
