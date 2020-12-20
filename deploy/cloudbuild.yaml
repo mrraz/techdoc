@@ -8,7 +8,7 @@ images:
 steps:
 - id: 'download git code and submodule'
   name: 'gcr.io/cloud-builders/git'
-  args: ['clone', 'https://github.com/google/docsy-example.git']
+  args: ['clone', '--recurse-submodules', '--depth 1', 'https://github.com/google/docsy-example.git']
 
 
 # the step needed only only when creating/updating Hugo image
