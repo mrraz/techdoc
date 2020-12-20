@@ -11,8 +11,6 @@ steps:
   name: 'gcr.io/cloud-builders/git'
   args: ['clone', 'https://github.com/google/docsy-example.git']
 
-
-steps:
 - id: 'download git submodule'
   name: 'gcr.io/cloud-builders/git'
   entrypoint: 'sh'
