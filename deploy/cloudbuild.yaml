@@ -1,15 +1,15 @@
 substitutions:
-  _HUGO_VERSION: "0.52"
+  _HUGO_VERSION: "0.76.5/extended"
 
 images: 
   - 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest'
   
 # https://cloud.google.com/cloud-build/docs/build-config
 
-steps:
-- id: 'download git code'
-  name: 'gcr.io/cloud-builders/git'
-  args: ['clone', 'https://github.com/google/docsy-example.git']
+#steps:
+#- id: 'download git code'
+#  name: 'gcr.io/cloud-builders/git'
+#  args: ['clone', 'https://github.com/google/docsy-example.git']
 
 - id: 'download git submodule'
   name: 'gcr.io/cloud-builders/git'
@@ -19,7 +19,7 @@ steps:
     - |
       git config -f .git/config submodule.github_mrraz_techdoc.url https://source.cloud.google.com/silken-inverter-299218/github_mrraz_techdoc 
       git config -f .gitmodules submodule.github_mrraz_techdoc.url https://source.cloud.google.com/silken-inverter-299218/github_mrraz_techdoc
-      git submodule init
+#      git submodule init
       git submodule update --init --recursive
 
 
