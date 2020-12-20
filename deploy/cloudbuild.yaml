@@ -13,7 +13,7 @@ steps:
 
 - id: 'download git submodule'
   name: 'gcr.io/cloud-builders/git'
-  entrypoint: 'sh'
+  entrypoint: 'bash'
   args:
     - -c
     - |
