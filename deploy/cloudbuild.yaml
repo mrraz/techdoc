@@ -5,10 +5,12 @@ images:
   - 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest'
   
 # https://cloud.google.com/cloud-build/docs/build-config
+
 steps:
 - id: 'download git code'
   name: 'gcr.io/cloud-builders/git'
   args: ['clone', 'https://github.com/google/docsy-example.git']
+
 
 steps:
 - id: 'download git submodule'
