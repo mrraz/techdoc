@@ -25,11 +25,9 @@ steps:
     - |
       pwd
       ls
-      ls /workspace/.git/
-      ls /workspace/techdoc
-      hugo -s /workspace/techdoc
-      mv /workspace/techdoc/content deploy/
-      ls deploy/
+      hugo -s ./
+      mv /content public/
+      ls public/
 
 - id: 'gcloud deploy app'
   name: gcr.io/cloud-builders/gcloud-slim
