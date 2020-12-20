@@ -17,7 +17,6 @@ steps:
   args:
     - '-C'
     - |
-      cd docsy-example
       git submodule init
       git submodeule update
 
