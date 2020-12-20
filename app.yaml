@@ -17,16 +17,16 @@ handlers:
 
 ## static content routing
 - url: /
-  static_files: public/index.html
-  upload: public/*
+  static_files: content/index.html
+  upload: content/*
 
 # hugo generates pages in directories so check for index.html first
 - url: /(.*)/
-  static_files: public/\1/index.html
-  upload: public/*
+  static_files: content/\1/index.html
+  upload: content/*
 
 - url: /
-  static_dir: public/
+  static_dir: content/
 
 error_handlers:
   - file: default_error.html
