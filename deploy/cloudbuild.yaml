@@ -12,13 +12,14 @@ steps:
   args: ['clone', 'https://github.com/google/docsy-example.git']
 
 - id: 'download git submodule'
-  name: 'gcr.io/cloud-builders/gcloud'
+  name: 'gcr.io/cloud-builders/git'
   entrypoint: 'bash'
   args:
-    - -c
+    - '-C'
     - |
       cd docsy-example
-      git submodule update --init --recursiveupdate
+      git submodule init
+      git submodeule update
 
 
 # the step needed only only when creating/updating Hugo image
