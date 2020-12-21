@@ -42,8 +42,7 @@ steps:
     - |
       pwd
       ls
-      hugo -s ./
-      mv /content public/
+      hugo - v -s ./
       ls public/
 
 - id: 'gcloud deploy app'
