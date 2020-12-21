@@ -1,7 +1,7 @@
 FROM alpine:3.5 as build
 
-ARG HUGO_VERSION=0.79.1
-ENV HUGO_BINARY=hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz
+ARG HUGO_VERSION=0.52
+ENV HUGO_BINARY=hugo_${HUGO_VERSION}_Linux-64bit.tar.gz
 
 # Install Hugo
 RUN set -x && \
@@ -13,4 +13,7 @@ RUN set -x && \
   apk del wget ca-certificates && \
   rm /var/cache/apk/*
 
-ENTRYPOINT ["/usr/bin/hugo"]
+#ENTRYPOINT ["ping", "www.google.com"]
+#CMD ["hugo"]
+#ENTRYPOINT /usr/bin/hugo
+ENTRYPOINT hugo-official
