@@ -35,13 +35,8 @@ steps:
 #        ]
 
 - id: 'hugo build site'
-  name: 'klakegg/hugo:0.57.2-ext-alpine'
-  entrypoint: 'hugo'
-  args:
-    - -c
-    - |
-      hugo -s ./
-      ls public/
+  name: 'docker pull peaceiris/hugo:latest-full'
+  args: ['-s ./']
 
 - id: 'gcloud deploy app'
   name: gcr.io/cloud-builders/gcloud-slim
