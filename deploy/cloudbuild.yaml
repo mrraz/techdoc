@@ -24,7 +24,7 @@ steps:
 
 - id: 'hugo build site'
   name: 'peaceiris/hugo:latest-full'
-  args: ['-s ./']
+  #args: ['-s ./']
 
 - id: 'gcloud deploy app'
   name: gcr.io/cloud-builders/gcloud-slim
