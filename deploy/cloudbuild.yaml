@@ -43,7 +43,7 @@ steps:
       cd /
       pwd
       ls
-      hugo -s /workspace
+      /hugo -s /workspace
       ls public/
 
 - id: 'gcloud deploy app'
