@@ -45,12 +45,12 @@ steps:
       npm install 
       pwd
       ls
-      hugo
+      hugo -d ./public/public
 
 
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'bash'
-  args: ['-c', 'pwd && ls -l && gcloud app deploy app.yaml']
+  args: ['-c', 'pwd && cp app.yaml ./public/app.yaml && cd public && ls -l && gcloud app deploy app.yaml']
 timeout: '1600s'
 
 
