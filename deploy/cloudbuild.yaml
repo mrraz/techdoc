@@ -47,10 +47,17 @@ steps:
       ls
       hugo
 
-- id: 'gcloud deploy app'
-  name: gcr.io/cloud-builders/gcloud-slim
-  dir: public/
-  args: ['--project=$PROJECT_ID', 'app', 'deploy', '/workspace/deploy/app.yaml']
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args: ['-c', 'gcloud config set app/cloud_build_timeout 1600 && gcloud builds submit ./public && gcloud app deploy /workspace/deploy/app.yaml']
+timeout: '1600s'
+
+
+#- id: 'gcloud deploy app'
+#  name: gcr.io/cloud-builders/gcloud-slim
+#  dir: public/
+#  args: ['--project=$PROJECT_ID', 'app', 'deploy', '/workspace/deploy/app.yaml']
 
 options:
   machineType: 'N1_HIGHCPU_32'
