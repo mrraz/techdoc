@@ -40,9 +40,10 @@ steps:
   args:
     - -c
     - |
+      cd /
       pwd
       ls
-      hugo -s ./
+      hugo -s /workspace
       ls public/
 
 - id: 'gcloud deploy app'
