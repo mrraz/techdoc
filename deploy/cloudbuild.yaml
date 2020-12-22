@@ -36,6 +36,16 @@ steps:
 
 - id: 'hugo build site'
   name: 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      pwd
+      ls
+      npm install 
+      pwd
+      ls
+      hugo ./
 
 - id: 'gcloud deploy app'
   name: gcr.io/cloud-builders/gcloud-slim
