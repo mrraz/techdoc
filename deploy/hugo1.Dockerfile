@@ -7,7 +7,7 @@ ENV DOCKER_HUGO_URL="${DOCKER_HUGO_BASE_URL}/v${DOCKER_HUGO_VERSION}/${DOCKER_HU
 ENV DOCKER_HUGO_CHECKSUM_URL="${DOCKER_HUGO_BASE_URL}/v${DOCKER_HUGO_VERSION}/hugo_${DOCKER_HUGO_VERSION}_checksums.txt"
 ARG INSTALL_NODE="true"
 
-WORKDIR /build
+#WORKDIR /build
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 RUN apk add --no-cache --virtual .build-deps wget && \
     apk add --no-cache \
@@ -26,10 +26,13 @@ RUN apk add --no-cache --virtual .build-deps wget && \
     apk del .build-deps
 
 RUN apk add --update nodejs npm && \
-    mkdir -p /user/bin/node_modules && \
-    npm install -D --save --prefix /usr/bin postcss postcss-cli && \
-    npm install -D --save --prefix /usr/bin autoprefixer
+    echo "path pwd: $(pwd)" && \
+    echo "path ls: $(ls)" && \
+    npm install -D --save postcss postcss-cli && \
+    npm install -D --save autoprefixer && \
+    echo "path pwd: $(pwd)" && \
+    echo "path ls: $(ls)"
 
 
-
+WORKDIR /src
 ENTRYPOINT [ "/usr/bin/hugo" ]
