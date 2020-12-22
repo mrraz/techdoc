@@ -1,3 +1,27 @@
+
+# TechDoc on GCP
+
+This repo is for hosting technocal documentation static pages in GCP. This is based on hugo docsy theme similar to kubernates.io.
+
+Follow steps below to duplicate this implementation;
+1. Fork repo
+2. Boot strap GCP project
+3. Build trigger and link to your repo
+4. Sync your repo to cloud repo
+5. Update cloudbuild.yaml file
+6. Update config.toml file
+7. Update your homepage
+8. Start editing your documentation
+9. configure IAP
+10. create cname record for your apppengine url
+10. Keep updating doc
+
+
+
+
+
+
+
 # Docsy Example
 
 [Docsy](https://github.com/google/docsy) is a Hugo theme for technical documentation sites, providing easy site navigation, structure, and more. This **Docsy Example Project** uses the Docsy theme, as well as providing a skeleton documentation structure for you to use. You can either copy this project and edit it with your own content, or use the theme in your projects like any other [Hugo theme](https://gohugo.io/themes/installing-and-using-themes/).
