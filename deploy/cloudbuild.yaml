@@ -31,20 +31,11 @@ steps:
             '--build-arg', 'HUGO_VERSION=${_HUGO_VERSION}',
             '-t', 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest',
             '--cache-from', 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest',
-            '-f', 'deploy/hugo1.Dockerfile', 'deploy/'
+            '-f', 'deploy/hugo3.Dockerfile', 'deploy/'
         ]
 
 - id: 'hugo build site'
   name: 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest'
-  entrypoint: 'sh'
-  args:
-    - -c
-    - |
-      cd /
-      pwd
-      ls
-      /hugo -s /workspace
-      ls public/
 
 - id: 'gcloud deploy app'
   name: gcr.io/cloud-builders/gcloud-slim
