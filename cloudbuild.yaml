@@ -32,7 +32,7 @@ steps:
             '--build-arg', 'HUGO_VERSION=${_HUGO_VERSION}',
             '-t', 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest',
             '--cache-from', 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest',
-            '-f', 'deploy/hugo3.Dockerfile', 'deploy/'
+            '-f', 'hugo.Dockerfile', 'deploy/'
         ]
 # This step installs npm dependencies/requirement based on package.jason file and runs hugo build to generate static pages on ./public/pub directory
 - id: 'hugo build site'
