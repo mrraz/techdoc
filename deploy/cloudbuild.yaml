@@ -50,7 +50,7 @@ steps:
 
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'bash'
-  args: ['-c', 'pwd && ls -l && gcloud app deploy']
+  args: ['-c', 'pwd && ls -l && gcloud app deploy app.yaml']
 timeout: '1600s'
 
 
