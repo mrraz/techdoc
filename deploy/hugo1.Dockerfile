@@ -26,8 +26,9 @@ RUN apk add --no-cache --virtual .build-deps wget && \
     apk del .build-deps
 
 RUN apk add --update nodejs npm && \
-    npm install -g --save postcss postcss-cli && \
-    npm install -g --save autoprefixer
+    mkdir -p /user/bin/node_modules && \
+    npm install -D --save --prefix /usr/bin postcss postcss-cli && \
+    npm install -D --save --prefix /usr/bin autoprefixer
 
 
 
