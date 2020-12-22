@@ -21,8 +21,8 @@ RUN apk add --no-cache --virtual .build-deps wget && \
     wget --quiet "${DOCKER_HUGO_CHECKSUM_URL}" && \
     grep "${DOCKER_HUGO_NAME}.tar.gz" "./hugo_${DOCKER_HUGO_VERSION}_checksums.txt" | sha256sum -c - && \
     tar -zxvf "${DOCKER_HUGO_NAME}.tar.gz" && \
-    mv ./hugo /usr/bin/hugo && \
-    hugo version && \
+    mv ./hugo /hugo && \
+    /hugo version && \
     apk del .build-deps
 
 RUN apk add --update nodejs npm && \
@@ -31,8 +31,7 @@ RUN apk add --update nodejs npm && \
     npm install -D --save postcss postcss-cli && \
     npm install -D --save autoprefixer && \
     echo "path pwd: $(pwd)" && \
-    echo "path ls: $(ls)"
+    echo "path ls: $(ls /node_modules)"
 
 
-WORKDIR /src
-ENTRYPOINT [ "/usr/bin/hugo" ]
+ENTRYPOINT [ "/hugo" ]
