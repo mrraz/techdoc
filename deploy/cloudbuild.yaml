@@ -7,20 +7,20 @@ images:
 # https://cloud.google.com/cloud-build/docs/build-config
 
 steps:
-- id: 'download git code'
-  name: 'gcr.io/cloud-builders/git'
-  args: ['clone', 'https://github.com/google/docsy-example.git']
-
 - id: 'download git submodule'
   name: 'gcr.io/cloud-builders/git'
   entrypoint: 'bash'
   args:
     - '-c'
     - |
+      pwd
+      ls
       git config -f .git/config submodule.github_mrraz_techdoc.url https://source.cloud.google.com/silken-inverter-299218/github_mrraz_techdoc 
       git config -f .gitmodules submodule.github_mrraz_techdoc.url https://source.cloud.google.com/silken-inverter-299218/github_mrraz_techdoc
       git submodule init
       git submodule update --init --recursive
+      pwd
+      ls
 
 
 # the step needed only only when creating/updating Hugo image

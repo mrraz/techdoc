@@ -28,8 +28,8 @@ RUN apk add --no-cache --virtual .build-deps wget && \
 RUN apk add --update nodejs npm && \
     echo "path pwd: $(pwd)" && \
     echo "path ls: $(ls)" && \
-    npm install -g  postcss postcss-cli && \
-    npm install autoprefixer && \
+    npm install -D --save postcss postcss-cli && \
+    npm install -D --save autoprefixer && \
     echo "path pwd: $(pwd)" && \
     echo "path ls: $(ls /node_modules)"
 
