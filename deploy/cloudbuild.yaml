@@ -49,7 +49,7 @@ steps:
 
 - id: 'gcloud deploy app'
   name: gcr.io/cloud-builders/gcloud-slim
-  dir: deploy/
+  dir: public/
   args: ['--project=$PROJECT_ID', 'app', 'deploy', 'app.yaml']
 
 options:
