@@ -1,29 +1,30 @@
 substitutions:
   _HUGO_VERSION: "0.79.1"
+  _MIRROR_CLOUD_REPO: "github_mrraz_techdoc"
 
 images: 
   - 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest'
   
 # https://cloud.google.com/cloud-build/docs/build-config
+# This ste
 
 steps:
+
+# this step is needed due to issue with cloud build not downloading git submodule documented in (https://stackoverflow.com/questions/59180893/google-cloud-build-cant-update-submodules) 
+
 - id: 'download git submodule'
   name: 'gcr.io/cloud-builders/git'
   entrypoint: 'bash'
   args:
     - '-c'
     - |
-      pwd
-      ls
-      git config -f .git/config submodule.github_mrraz_techdoc.url https://source.cloud.google.com/silken-inverter-299218/github_mrraz_techdoc 
-      git config -f .gitmodules submodule.github_mrraz_techdoc.url https://source.cloud.google.com/silken-inverter-299218/github_mrraz_techdoc
+      git config -f .git/config submodule.${_MIRROR_CLOUD_REPO}.url https://source.cloud.google.com/$PROJECT_ID/${_MIRROR_CLOUD_REPO} 
+      git config -f .gitmodules submodule.${_MIRROR_CLOUD_REPO}.url https://source.cloud.google.com/$PROJECT_ID/${_MIRROR_CLOUD_REPO}
       git submodule init
       git submodule update --init --recursive
-      pwd
-      ls
 
 
-# the step needed only only when creating/updating Hugo image
+# the step needed only only when creating/updating Hugo image from docker file
 - id: 'budil hugo img'
   name: 'gcr.io/cloud-builders/docker'
   args: [
@@ -33,25 +34,20 @@ steps:
             '--cache-from', 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest',
             '-f', 'deploy/hugo3.Dockerfile', 'deploy/'
         ]
-
+# This step installs npm dependencies/requirement based on package.jason file and runs hugo build to generate static pages on ./public/pub directory
 - id: 'hugo build site'
   name: 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest'
   entrypoint: 'sh'
   args:
     - '-c'
     - |
-      pwd
-      ls
       npm install 
-      pwd
-      ls
       hugo -d ./public/public
 
-
+# This step deploys static pages from ./public/public folder into app engine. 
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'bash'
-  args: ['-c', 'pwd && cp app.yaml ./public/app.yaml && cd public && ls -l && gcloud app deploy app.yaml']
-timeout: '1600s'
+  args: ['-c', 'cp app.yaml ./public/app.yaml && cd public && gcloud app deploy app.yaml']
 
 
 options:
