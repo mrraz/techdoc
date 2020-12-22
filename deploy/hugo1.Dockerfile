@@ -30,5 +30,4 @@ RUN apk add --update nodejs npm && \
     npm install -D --save autoprefixer
 
 
-WORKDIR /src
 ENTRYPOINT [ "/usr/bin/hugo" ]
