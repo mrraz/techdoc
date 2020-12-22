@@ -42,7 +42,7 @@ steps:
     - |
       pwd
       ls
-      hugo - v -s ./
+      hugo -s ./
       ls public/
 
 - id: 'gcloud deploy app'
