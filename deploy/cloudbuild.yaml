@@ -22,9 +22,28 @@ steps:
       git submodule init
       git submodule update --init --recursive
 
+
+# the step needed only only when creating/updating Hugo image
+- id: 'budil hugo img'
+  name: 'gcr.io/cloud-builders/docker'
+  args: [
+            'build',
+            '--build-arg', 'HUGO_VERSION=${_HUGO_VERSION}',
+            '-t', 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest',
+            '--cache-from', 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest',
+            '-f', 'deploy/hugo.Dockerfile', 'deploy/'
+        ]
+
 - id: 'hugo build site'
-  name: 'peaceiris/hugo:latest-full'
-  #args: ['-s ./']
+  name: 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest'
+  entrypoint: 'sh'
+  args:
+    - -c
+    - |
+      pwd
+      ls
+      hugo - v -s ./
+      ls public/
 
 - id: 'gcloud deploy app'
   name: gcr.io/cloud-builders/gcloud-slim
