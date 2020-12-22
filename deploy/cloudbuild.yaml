@@ -50,7 +50,7 @@ steps:
 - id: 'gcloud deploy app'
   name: gcr.io/cloud-builders/gcloud-slim
   dir: deploy/
-  args: ['--project=$PROJECT_ID', 'app', 'deploy', 'app.yaml']
+  args: ['--project=$PROJECT_ID', 'app', 'public', 'app.yaml']
 
 options:
   machineType: 'N1_HIGHCPU_32'
