@@ -45,7 +45,7 @@ steps:
       npm install 
       pwd
       ls
-      hugo ./
+      hugo
 
 - id: 'gcloud deploy app'
   name: gcr.io/cloud-builders/gcloud-slim
