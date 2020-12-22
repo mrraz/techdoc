@@ -27,7 +27,10 @@ RUN apk add --no-cache --virtual .build-deps wget && \
 
 RUN apk add --update nodejs npm && \
     npm install -D --save postcss postcss-cli && \
-    npm install -D --save autoprefixer
+    npm install -g --save postcss postcss-cli && \
+    npm install -g --save autoprefixer && \
+    npm install -D --save autoprefixer && \
+    npm audit fix
 
 
 ENTRYPOINT [ "/usr/bin/hugo" ]
