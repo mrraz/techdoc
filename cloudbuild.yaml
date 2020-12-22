@@ -25,14 +25,14 @@ steps:
 
 
 # the step needed only only when creating/updating Hugo image from docker file
-- id: 'budil hugo img'
+- id: 'build hugo image'
   name: 'gcr.io/cloud-builders/docker'
   args: [
             'build',
             '--build-arg', 'HUGO_VERSION=${_HUGO_VERSION}',
             '-t', 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest',
             '--cache-from', 'gcr.io/$PROJECT_ID/hugo-${_HUGO_VERSION}:latest',
-            '-f', 'hugo.Dockerfile', '/'
+            '-f', 'hugo.Dockerfile', 'content/'
         ]
 # This step installs npm dependencies/requirement based on package.jason file and runs hugo build to generate static pages on ./public/pub directory
 - id: 'hugo build site'
