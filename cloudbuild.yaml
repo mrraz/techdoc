@@ -50,7 +50,3 @@ steps:
   args: ['-c', 'cp app.yaml ./public/app.yaml && cd public && gcloud app deploy app.yaml']
 
 
-options:
-  machineType: 'N1_HIGHCPU_32'
-
-timeout: '1600s'
